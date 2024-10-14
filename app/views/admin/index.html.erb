@@ -1,0 +1,47 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Link Clicks" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Link Clicks Statistics</h1>
+  </div>
+
+  <%= form_with url: admin_path, method: :get, local: true do %>
+    <div>
+      <label for="start_date">Start Date:</label>
+      <%= date_field_tag :start_date, params[:start_date], class: "date-input rounded-lg mt-5 font-medium" %>
+    </div>
+    <div>
+      <label for="end_date">End Date:</label>
+      <%= date_field_tag :end_date, params[:end_date], class: "date-input rounded-lg mt-5 font-medium" %>
+    </div>
+    <%= submit_tag "Filter", class: "button rounded-lg mt-5 py-3 px-5 bg-blue-600 text-white block font-medium hover:cursor-pointer" %>
+  <% end %>
+
+  <h3 id="total_link_clicks" class="my-5 font-bold">
+    Total Clicks: <%= @total_link_clicks %>
+  </h3>
+
+  <% if @total_link_clicks > 0%>
+    <h3 id="most_clicked_link" class="my-5">
+      <strong class="font-bold">
+        Most clicked link: 
+        <%= 
+            link_to @most_clicked_link,
+            @most_clicked_link, 
+            class:"underline text-blue-600 hover:text-blue-800 visited:text-purple-600" 
+        %>
+        with total click count of <%= @most_clicked_link_count %>.
+      </strong>
+    </h3>
+  <% end %>
+
+  <h4 class="font-bold">Clicks Over Time:</h4>
+  <% @clicks_over_time.each do |date, count| %>
+    <p class="font-bold"><%= date %>: <%= count %> clicks</p>
+  <% end %>
+
+</div>
