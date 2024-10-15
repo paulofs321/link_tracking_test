@@ -33,10 +33,14 @@ class LinkClicksController < ApplicationController
     end
 
     def cache_keys_to_delete
-      cache_keys = Rails.cache.instance_variable_get(:@data).keys
+      cache_data = Rails.cache.instance_variable_get(:@data)
+
+      return [] if cache_data.nil?
+
+      cache_keys = cache_data.keys
 
       cache_keys.map do |k, v|
-        k if k.include? "#{Date.today}"
-      end
+        k if k.include?("#{Date.today}")
+      end.compact
     end
 end
