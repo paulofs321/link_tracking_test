@@ -9,12 +9,11 @@ class ApplicationRepository
 
   class << self
     def all
-      model.all.map { |record| create_entity(record) }
+      model.all
     end
 
     def find(id)
-      record = model.find(id)
-      create_entity(record) if record
+      model.find(id)
     rescue ActiveRecord::RecordNotFound
       nil
     end
@@ -25,20 +24,18 @@ class ApplicationRepository
 
         records = model.create!(symobolized_data)
 
-        records.map do |record|
-          create_entity(record)
-        end
+        records
       else
         record = model.create!(data.symbolize_keys)
 
-        create_entity(record)
+        record
       end
     end
 
     def update(id, params)
       record = @model.find(id)
       if record.update(params)
-        create_entity(record)
+        record
       else
         nil
       end
@@ -49,21 +46,13 @@ class ApplicationRepository
     end
 
     def generate_id
-      Helpers::Tokenizer.generate(entity_class::PREFIX, self)
+      Helpers::Tokenizer.generate(model::PREFIX, self)
     end
 
     private
 
     def base_class
       name.gsub(/Repository/, "")
-    end
-
-    def create_entity(record)
-      entity_class.new(record.attributes.symbolize_keys)
-    end
-
-    def entity_class
-      Object.const_get("#{base_class}Entity")
     end
   end
 end
