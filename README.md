@@ -66,10 +66,9 @@ Filter Options: Options to filter link clicks by date.
    bin/rails db:migrate
 
 4. **Precompile the assets**:
-
-  ```bash
-  bin/rails assets:precompile
-
+   ```bash
+   bin/rails assests:precompile
+   
 5. **Run the Server**:
 
    ```bash
