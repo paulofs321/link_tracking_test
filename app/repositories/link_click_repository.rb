@@ -81,9 +81,9 @@ class LinkClickRepository < ApplicationRepository
     end
   end
 
-  def self.clear_cache
-    # Rails.cache.delete("total_link_clicks")
-    # Rails.cache.delete("clicks_per_link")
-    Rails.cache.clear
+  def self.clear_cache(keys_to_delete)
+    keys_to_delete.each do |key|
+      Rails.cache.delete(key) unless key.nil?
+    end
   end
 end
