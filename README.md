@@ -67,15 +67,17 @@ Filter Options: Options to filter link clicks by date.
 
 4. **Precompile the assets**:
 
-  ``````bash
+  ```bash
   bin/rails assets:precompile
 
 5. **Run the Server**:
-   ``````bash
+
+   ```bash
    bin/rails server
 
 6. **Insert seed data to database**:
-   ``````bash
+
+   ```bash
    bin/rails db:seed
 
 ## Usage
