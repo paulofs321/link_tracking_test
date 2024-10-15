@@ -2,7 +2,13 @@ class LinkClickJob < ApplicationJob
   queue_as :default
 
   def perform(params)
-    params[:id] = LinkClickRepository.generate_id
+    if params.is_a? Array
+      params = params.each_with_index.map do |hash, index|
+        hash.merge(id: LinkClickRepository.generate_id)
+      end
+    else
+      params[:id] = LinkClickRepository.generate_id
+    end
 
     LinkClickRepository.create(
       params
