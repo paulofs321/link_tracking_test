@@ -5,7 +5,10 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.cache_classes = true
+  config.action_controller.perform_caching = true
 
+  config.cache_store = :memory_store
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 

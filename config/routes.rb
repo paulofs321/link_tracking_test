@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   resources :posts
 
-  get "admin", action: :index, controller: "admin"
-  post "link_clicks", action: :create, controller: "link_clicks"
-  # get "/429", to: "errors#rate_limit_exceeded", :via => :all
+  get "admin", to: "admin#index", as: "admin"
 
-  get "errors/rate_limit_exceeded", to: "rate_limit_exceeded", controller: "errors"
+  post "link_clicks", action: :create, controller: "link_clicks"
+
+  get "errors/rate_limit_exceeded", to: "errors#rate_limit_exceeded", as: "rate_limit_exceeded"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
