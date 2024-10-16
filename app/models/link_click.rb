@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "resolv"
-
 # Model class for link clicks
 class LinkClick < ApplicationRecord
   validates :url, presence: true
